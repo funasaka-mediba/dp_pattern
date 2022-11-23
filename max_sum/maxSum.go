@@ -1,6 +1,10 @@
-package main
+package max_sum
 
-import "fmt"
+import (
+	"dp_pattern/stdin"
+	"fmt"
+	"log"
+)
 
 /*
 最大和問題
@@ -9,10 +13,24 @@ n個の整数が与えられる。
 これらの整数から何個かの整数を選んで総和をとったときの、総和の最大値を求めよ。また、何も選ばない場合の総和は 0 であるものとする。
 */
 
-func main() {
-	// 標準入力はいつでもできるから一旦スキップ
-	n := 6
-	input := []int{1, 4, -1, -6, 9, 2}
+func MaxSum() {
+	/*
+		入力例
+		maxSum
+		6
+		1 4 -1 -6 9 2
+
+		答え
+		16
+	*/
+	n, err := stdin.IntStdin()
+	if err != nil {
+		log.Fatalf("failed: %s", err)
+	}
+	input, err := stdin.SplitIntStdin(" ")
+	if err != nil {
+		log.Fatalf("failed: %s", err)
+	}
 
 	// これは正の整数を全て選んで足していけば総和の最大値になるが、DP法に慣れるためにやってみよう。
 	// DP法とは、全探索で行なっていくと計算量がとても大きくなってしまう場合に、一度行った計算結果をメモしておき、それを利用すれば計算量が減らせるんじゃないのという考え方。

@@ -1,6 +1,10 @@
-package main
+package knapsack
 
-import "fmt"
+import (
+	"dp_pattern/stdin"
+	"fmt"
+	"log"
+)
 
 /*
 ナップサック問題
@@ -22,11 +26,36 @@ n 個の品物があり、i 番目の品物のそれぞれ重さと価値が wei
 　答え: 94 ((3,6), (1,3), (5,85) を選んだときが最大です)
 */
 
-func main() {
-	n := 6
-	weight := []int{2, 1, 3, 2, 1, 5}
-	value := []int{3, 2, 6, 1, 3, 85}
-	W := 9
+func Knapsack() {
+	/*
+		入力例
+		knapsack
+		6
+		2 1 3 2 1 5
+		3 2 6 1 3 85
+		9
+
+		答え
+		94
+	*/
+
+	n, err := stdin.IntStdin()
+	if err != nil {
+		log.Fatalf("failed: %s", err)
+	}
+	weight, err := stdin.SplitIntStdin(" ")
+	if err != nil {
+		log.Fatalf("failed: %s", err)
+	}
+	value, err := stdin.SplitIntStdin(" ")
+	if err != nil {
+		log.Fatalf("failed: %s", err)
+	}
+	W, err := stdin.IntStdin()
+	if err != nil {
+		log.Fatalf("failed: %s", err)
+	}
+
 	/*
 		max_sumと同じように、dp[i+1]を考えるときにに、dp[i]とvalue[i]を足すかどうかを判断するのだが、それにはweight[i]とWの情報が制約として必要になってくる。
 		dp[i]
